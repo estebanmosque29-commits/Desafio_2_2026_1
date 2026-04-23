@@ -47,3 +47,23 @@ public:
 };
 
 #endif
+
+
+DirectorTecnico.h
+
+
+#ifndef DIRECTORTECNICO_H
+#define DIRECTORTECNICO_H
+
+class DirectorTecnico {
+private:
+    char* nombre;
+
+public:
+    DirectorTecnico();
+    DirectorTecnico(const char* nom);
+    DirectorTecnico(const DirectorTecnico& otro);
+    ~DirectorTecnico();
+};
+
+#endif
