@@ -71,3 +71,28 @@ char* Jugador::getNombre() {
 bool Jugador::operator==(const Jugador& otro) {
     return strcmp(this->nombre, otro.nombre) == 0;
 }
+
+
+DirectorTecnico.cpp
+
+
+#include "DirectorTecnico.h"
+#include <cstring>
+
+DirectorTecnico::DirectorTecnico() {
+    nombre = NULL;
+}
+
+DirectorTecnico::DirectorTecnico(const char* nom) {
+    nombre = new char[strlen(nom) + 1];
+    strcpy(nombre, nom);
+}
+
+DirectorTecnico::DirectorTecnico(const DirectorTecnico& otro) {
+    nombre = new char[strlen(otro.nombre) + 1];
+    strcpy(nombre, otro.nombre);
+}
+
+DirectorTecnico::~DirectorTecnico() {
+    delete[] nombre;
+}
