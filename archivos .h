@@ -67,3 +67,26 @@ public:
 };
 
 #endif
+
+
+EstadisticaEquipo.h
+
+
+#ifndef ESTADISTICAEQUIPO_H
+#define ESTADISTICAEQUIPO_H
+
+class EstadisticaEquipo {
+private:
+    int golesFavor;
+
+public:
+    EstadisticaEquipo();
+    EstadisticaEquipo(const EstadisticaEquipo& otra);
+
+    void setGolesFavor(int g);
+    int getGolesFavor();
+
+    EstadisticaEquipo operator+(const EstadisticaEquipo& otra);
+};
+
+#endif
