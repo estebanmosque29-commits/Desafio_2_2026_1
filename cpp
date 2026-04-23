@@ -96,3 +96,31 @@ DirectorTecnico::DirectorTecnico(const DirectorTecnico& otro) {
 DirectorTecnico::~DirectorTecnico() {
     delete[] nombre;
 }
+
+
+EstadisticaEquipo.cpp
+
+
+#include "EstadisticaEquipo.h"
+
+EstadisticaEquipo::EstadisticaEquipo() {
+    golesFavor = 0;
+}
+
+EstadisticaEquipo::EstadisticaEquipo(const EstadisticaEquipo& otra) {
+    golesFavor = otra.golesFavor;
+}
+
+void EstadisticaEquipo::setGolesFavor(int g) {
+    golesFavor = g;
+}
+
+int EstadisticaEquipo::getGolesFavor() {
+    return golesFavor;
+}
+
+EstadisticaEquipo EstadisticaEquipo::operator+(const EstadisticaEquipo& otra) {
+    EstadisticaEquipo temp;
+    temp.golesFavor = this->golesFavor + otra.golesFavor;
+    return temp;
+}
