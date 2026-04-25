@@ -1,126 +1,41 @@
-EstadisticaJugador.cpp
+Equipo.cpp
 
-#include "EstadisticaJugador.h"
-
-EstadisticaJugador::EstadisticaJugador() {
-    partidos = 0;
-    goles = 0;
-}
-
-EstadisticaJugador::EstadisticaJugador(const EstadisticaJugador& otra) {
-    partidos = otra.partidos;
-    goles = otra.goles;
-}
-
-void EstadisticaJugador::setGoles(int g) {
-    goles = g;
-}
-
-int EstadisticaJugador::getGoles() {
-    return goles;
-}
-
-EstadisticaJugador EstadisticaJugador::operator+(const EstadisticaJugador& otra) {
-    EstadisticaJugador temp;
-    temp.goles = this->goles + otra.goles;
-    temp.partidos = this->partidos + otra.partidos;
-    return temp;
-}
-
-
-Jugador.cpp
-
-#include "Jugador.h"
+#include "Equipo.h"
 #include <cstring>
+#include <cstdio>
 
-Jugador::Jugador() {
-    nombre = NULL;
-    numero = 0;
-    estadisticas = new EstadisticaJugador();
+Equipo::Equipo() {
+    std::strcpy(nombre, "Sin Nombre");
+    std::strcpy(confederacion, "N/A");
+    ranking = 0;
+    gf_historicos = 0.0;
+    gc_historicos = 0.0;
+    resetearEstadisticasTorneo();
 }
 
-Jugador::Jugador(const char* nom, int num) {
-    nombre = new char[strlen(nom) + 1];
-    strcpy(nombre, nom);
-    numero = num;
-    estadisticas = new EstadisticaJugador();
-}
-
-Jugador::Jugador(const Jugador& otro) {
-    nombre = new char[strlen(otro.nombre) + 1];
-    strcpy(nombre, otro.nombre);
-    numero = otro.numero;
-    estadisticas = new EstadisticaJugador(*otro.estadisticas);
-}
-
-Jugador::~Jugador() {
-    delete[] nombre;
-    delete estadisticas;
-}
-
-void Jugador::setNombre(const char* nom) {
-    delete[] nombre;
-    nombre = new char[strlen(nom) + 1];
-    strcpy(nombre, nom);
-}
-
-char* Jugador::getNombre() {
-    return nombre;
-}
-
-bool Jugador::operator==(const Jugador& otro) {
-    return strcmp(this->nombre, otro.nombre) == 0;
-}
-
-
-DirectorTecnico.cpp
-
-
-#include "DirectorTecnico.h"
-#include <cstring>
-
-DirectorTecnico::DirectorTecnico() {
-    nombre = NULL;
-}
-
-DirectorTecnico::DirectorTecnico(const char* nom) {
-    nombre = new char[strlen(nom) + 1];
-    strcpy(nombre, nom);
-}
-
-DirectorTecnico::DirectorTecnico(const DirectorTecnico& otro) {
-    nombre = new char[strlen(otro.nombre) + 1];
-    strcpy(nombre, otro.nombre);
-}
-
-DirectorTecnico::~DirectorTecnico() {
-    delete[] nombre;
-}
-
-
-EstadisticaEquipo.cpp
-
-
-#include "EstadisticaEquipo.h"
-
-EstadisticaEquipo::EstadisticaEquipo() {
+void Equipo::resetearEstadisticasTorneo() {
+    puntos = 0;
     golesFavor = 0;
+    golesContra = 0;
+    diferenciaGoles = 0;
 }
 
-EstadisticaEquipo::EstadisticaEquipo(const EstadisticaEquipo& otra) {
-    golesFavor = otra.golesFavor;
+void Equipo::inicializarPlantilla() {
+    for (int i = 0; i < 26; i++) {
+        plantilla[i].numero = i + 1;
+        std::sprintf(plantilla[i].nombre, "Nombre%d", i + 1);
+        std::sprintf(plantilla[i].apellido, "Apellido%d", i + 1);
+        plantilla[i].goles = 0;
+        plantilla[i].tarjetasAmarillas = 0;
+        plantilla[i].tarjetasRojas = 0;
+        plantilla[i].faltas = 0;
+    }
 }
 
-void EstadisticaEquipo::setGolesFavor(int g) {
-    golesFavor = g;
-}
-
-int EstadisticaEquipo::getGolesFavor() {
-    return golesFavor;
-}
-
-EstadisticaEquipo EstadisticaEquipo::operator+(const EstadisticaEquipo& otra) {
-    EstadisticaEquipo temp;
-    temp.golesFavor = this->golesFavor + otra.golesFavor;
-    return temp;
+void Equipo::repartirGolesHistoricos(long& iteraciones) {
+    int totales = (int)gf_historicos;
+    for (int i = 0; i < totales; i++) {
+        plantilla[i % 26].goles++;
+        iteraciones++;
+    }
 }
