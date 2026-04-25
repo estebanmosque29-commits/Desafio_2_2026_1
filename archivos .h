@@ -89,3 +89,23 @@ public:
 };
 
 #endif
+
+
+partido.h
+
+#ifndef PARTIDO_H
+#define PARTIDO_H
+#include "Equipo.h"
+
+class Partido {
+public:
+    Equipo* e1;
+    Equipo* e2;
+    int golesE1;
+    int golesE2;
+
+    Partido();
+    void simular(long& iteraciones, bool esEliminacion);
+};
+
+#endif
