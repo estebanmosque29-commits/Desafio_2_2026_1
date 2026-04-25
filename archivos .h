@@ -1,92 +1,28 @@
-EstadisticaJugador.h
+Equipo.h
 
-#ifndef ESTADISTICAJUGADOR_H
-#define ESTADISTICAJUGADOR_H
+#ifndef EQUIPO_H
+#define EQUIPO_H
+#include "Jugador.h"
 
-class EstadisticaJugador {
-private:
-    int partidos;
-    int goles;
-
+class Equipo {
 public:
-    EstadisticaJugador();
-    EstadisticaJugador(const EstadisticaJugador& otra);
+    char nombre[50];
+    char confederacion[15];
+    int ranking;
+    double gf_historicos;
+    double gc_historicos;
+    Jugador plantilla[26];
 
-    void setGoles(int g);
-    int getGoles();
-
-    EstadisticaJugador operator+(const EstadisticaJugador& otra);
-};
-
-#endif
-
-
-Jugador.h
-
-#ifndef JUGADOR_H
-#define JUGADOR_H
-
-#include "EstadisticaJugador.h"
-
-class Jugador {
-private:
-    char* nombre;
-    int numero;
-    EstadisticaJugador* estadisticas;
-
-public:
-    Jugador();
-    Jugador(const char* nom, int num);
-    Jugador(const Jugador& otro);
-    ~Jugador();
-
-    void setNombre(const char* nom);
-    char* getNombre();
-
-    bool operator==(const Jugador& otro);
-};
-
-#endif
-
-
-DirectorTecnico.h
-
-
-#ifndef DIRECTORTECNICO_H
-#define DIRECTORTECNICO_H
-
-class DirectorTecnico {
-private:
-    char* nombre;
-
-public:
-    DirectorTecnico();
-    DirectorTecnico(const char* nom);
-    DirectorTecnico(const DirectorTecnico& otro);
-    ~DirectorTecnico();
-};
-
-#endif
-
-
-EstadisticaEquipo.h
-
-
-#ifndef ESTADISTICAEQUIPO_H
-#define ESTADISTICAEQUIPO_H
-
-class EstadisticaEquipo {
-private:
+    // Estadísticas para la Fase de Grupos (RF III)
+    int puntos;
     int golesFavor;
+    int golesContra;
+    int diferenciaGoles;
 
-public:
-    EstadisticaEquipo();
-    EstadisticaEquipo(const EstadisticaEquipo& otra);
-
-    void setGolesFavor(int g);
-    int getGolesFavor();
-
-    EstadisticaEquipo operator+(const EstadisticaEquipo& otra);
+    Equipo();
+    void inicializarPlantilla();
+    void repartirGolesHistoricos(long& iteraciones);
+    void resetearEstadisticasTorneo();
 };
 
 #endif
