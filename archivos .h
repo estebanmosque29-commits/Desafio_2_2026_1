@@ -48,3 +48,44 @@ public:
 };
 
 #endif
+
+
+Lista.h
+
+#ifndef LISTA_H
+#define LISTA_H
+
+template <typename T>
+class Lista {
+private:
+    T* elementos;
+    int capacidad;
+    int cantidad;
+    long* pIter;
+
+public:
+    Lista(long* _iter) : capacidad(50), cantidad(0), pIter(_iter) {
+        elementos = new T[capacidad];
+    }
+    ~Lista() { delete[] elementos; }
+
+    void agregar(const T& e) {
+        if (cantidad == capacidad) {
+            capacidad *= 2;
+            T* nuevo = new T[capacidad];
+            for (int i = 0; i < cantidad; i++) {
+                nuevo[i] = elementos[i];
+                (*pIter)++;
+            }
+            delete[] elementos;
+            elementos = nuevo;
+        }
+        elementos[cantidad++] = e;
+        (*pIter)++;
+    }
+
+    T& obtener(int i) { return elementos[i]; }
+    int size() const { return cantidad; }
+};
+
+#endif
