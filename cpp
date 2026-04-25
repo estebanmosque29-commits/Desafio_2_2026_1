@@ -39,3 +39,20 @@ void Equipo::repartirGolesHistoricos(long& iteraciones) {
         iteraciones++;
     }
 }
+
+
+Jugador.cpp
+
+#include "Jugador.h"
+#include <cstring>
+
+Jugador::Jugador() {
+    std::strcpy(nombre, "");
+    std::strcpy(apellido, "");
+    numero = 0;
+    goles = 0;
+    tarjetasAmarillas = 0;
+    tarjetasRojas = 0;
+    faltas = 0;
+    minutosJugados = 0;
+}
