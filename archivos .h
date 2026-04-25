@@ -26,3 +26,25 @@ public:
 };
 
 #endif
+
+
+Jugador.h
+
+#ifndef JUGADOR_H
+#define JUGADOR_H
+
+class Jugador {
+public:
+    char nombre[50];
+    char apellido[50];
+    int numero;
+    int goles;
+    int tarjetasAmarillas;
+    int tarjetasRojas;
+    int faltas;
+    int minutosJugados;
+
+    Jugador();
+};
+
+#endif
